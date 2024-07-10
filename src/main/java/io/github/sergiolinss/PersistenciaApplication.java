@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @SpringBootApplication
 @RestController
 public class PersistenciaApplication {
@@ -20,13 +22,31 @@ public class PersistenciaApplication {
     private RepositorioClientes repositorioClientes;
 
     @Bean
-    public CommandLineRunner teste(){
+    public CommandLineRunner teste() {
         return (args) -> {
-            Cliente cliente = new Cliente();
-            cliente.setNome("Sérgio");
-            repositorioClientes.save(cliente);
+            System.out.println(" SALVANDO CLIENTES ");
+            repositorioClientes.save(new Cliente("Sérgio"));
+            repositorioClientes.save(new Cliente("Carlos"));
+            List<Cliente> clientesList = repositorioClientes.findAll();
+            clientesList.forEach(System.out::println);
 
-            repositorioClientes.findAll().forEach(c -> System.out.println(c.getNome())); //"c -> System.out.println(c.getNome())" é uma lambda
+            System.out.println(" ATUALIZANDO CLIENTES ");
+            Cliente atualizarCliente = repositorioClientes.findById(2).get();
+            atualizarCliente.setNome("Carlos atualizado");
+            repositorioClientes.save(atualizarCliente);
+            System.out.println(atualizarCliente);
+
+            System.out.println(" ENCONTRANDO CLIENTES PELO NOME ");
+            List<Cliente> findByNome = repositorioClientes.findByNome("Car"); // funcionou com parte do nome pois usamos o @Query no findByNome
+            findByNome.forEach(System.out::println);
+
+//            repositorioClientes.deleteAll();
+//            clientesList = repositorioClientes.findAll(); // preciso buscar novamente os clientes após serem deletados, se eu usar o findAll da linha 30, os clientes ainda não foram deletados
+//            if (clientesList.isEmpty()){
+//                System.out.println("Nenhum cliente encontrado");
+//            }else{
+//                clientesList.forEach(System.out::println);
+//            }
         };
     }
 }

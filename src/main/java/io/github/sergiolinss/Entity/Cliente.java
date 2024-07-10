@@ -9,6 +9,13 @@ public class Cliente {
     @Column(name = "ID", nullable = false)
     private Integer id;
     private String nome;
+    /* quando criamos um construtor para uma entidade em JPA, é necessário que definamos o construtor padrão explicitamente
+    pois ele não é mais provido automaticamente */
+    public Cliente() {
+    }
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
 
     public Integer getId() {
         return id;
@@ -24,5 +31,13 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
