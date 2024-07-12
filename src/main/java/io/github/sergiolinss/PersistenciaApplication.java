@@ -37,8 +37,10 @@ public class PersistenciaApplication {
             System.out.println(atualizarCliente);
 
             System.out.println(" ENCONTRANDO CLIENTES PELO NOME ");
-            List<Cliente> findByNome = repositorioClientes.findByNome("Car"); // funcionou com parte do nome pois usamos o @Query no findByNome
-            findByNome.forEach(System.out::println);
+            repositorioClientes.findByNome("Car").forEach(System.out::println); // funcionou com parte do nome pois usamos o @Query no findByNome
+
+            boolean exite = repositorioClientes.existsByNome("Sérgio");
+            System.out.println("Existe um cliente com o nome Sérgio " + exite);
 
 //            repositorioClientes.deleteAll();
 //            clientesList = repositorioClientes.findAll(); // preciso buscar novamente os clientes após serem deletados, se eu usar o findAll da linha 30, os clientes ainda não foram deletados
