@@ -9,10 +9,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "CLIENTE_ID")
+    @ManyToOne // muitos pedidos para um cliente
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     private LocalDate dataPedido;
+    @Column(length = 20, precision = 2) // até 20 dígitos, no máximo 2 casas decimais
     private BigDecimal totalPedido;
 
     public Integer getId() {

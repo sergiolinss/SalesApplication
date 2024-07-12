@@ -1,6 +1,7 @@
 package io.github.sergiolinss.Entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Cliente {
@@ -9,10 +10,14 @@ public class Cliente {
     @Column(name = "ID", nullable = false)
     private Integer id;
     private String nome;
+    @OneToMany(mappedBy = "cliente") // buscamos os pedidos a partir da tabela de clientes
+    private Set<Pedido> pedidos; // lista de pedidos
+
     /* quando criamos um construtor para uma entidade em JPA, é necessário que definamos o construtor padrão explicitamente
     pois ele não é mais provido automaticamente */
     public Cliente() {
     }
+
     public Cliente(String nome) {
         this.nome = nome;
     }
@@ -31,6 +36,14 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
