@@ -4,8 +4,10 @@ import io.github.sergiolinss.Entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Repository
@@ -19,6 +21,8 @@ public interface RepositorioClientes extends JpaRepository<Cliente, Integer> {
     @Modifying
     @Query("delete from Cliente c where c.nome =:nome ")
     void deleteByNome(String nome);
+    @Query(" select c from Cliente c left join fetch c.pedidos where c.id = :id ") // left join busca o cliente tendo pedidos ou não, se fosse somente o join traria o cliente apenas se existir pedidos
+    Cliente findClienteFetchPedidos(@Param("id") Integer id);
 
 
 }
