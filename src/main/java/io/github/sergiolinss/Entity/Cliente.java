@@ -10,7 +10,7 @@ public class Cliente {
     @Column(name = "ID", nullable = false)
     private Integer id;
     private String nome;
-    @OneToMany(mappedBy = "cliente") // buscamos os pedidos a partir da tabela de clientes
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY) // buscamos os pedidos a partir da tabela de clientes
     private Set<Pedido> pedidos; // lista de pedidos
 
     /* quando criamos um construtor para uma entidade em JPA, é necessário que definamos o construtor padrão explicitamente

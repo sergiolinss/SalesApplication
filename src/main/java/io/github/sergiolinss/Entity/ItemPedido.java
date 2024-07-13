@@ -9,11 +9,11 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "PEDIDO_ID")
+    @ManyToOne // muitos itens pedidos para um pedido
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-    @ManyToOne
-    @JoinColumn(name = "PRODUTO_ID")
+    @ManyToOne // muitos itens pedidos para um produto
+    @JoinColumn(name = "produto_id")
     private Produto produto;
     private Integer quantidade;
 
