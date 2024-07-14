@@ -1,4 +1,4 @@
-package io.github.sergiolinss.Repositorios;
+package io.github.sergiolinss.Repository;
 
 import io.github.sergiolinss.Entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;

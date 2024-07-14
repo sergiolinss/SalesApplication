@@ -2,8 +2,8 @@ package io.github.sergiolinss;
 
 import io.github.sergiolinss.Entity.Cliente;
 import io.github.sergiolinss.Entity.Pedido;
-import io.github.sergiolinss.Repositorios.RepositorioClientes;
-import io.github.sergiolinss.Repositorios.RepositorioPedidos;
+import io.github.sergiolinss.Repository.RepositorioClientes;
+import io.github.sergiolinss.Repository.RepositorioPedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

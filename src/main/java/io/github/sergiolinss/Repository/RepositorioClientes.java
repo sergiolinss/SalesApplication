@@ -1,4 +1,4 @@
-package io.github.sergiolinss.Repositorios;
+package io.github.sergiolinss.Repository;
 
 import io.github.sergiolinss.Entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Repository
