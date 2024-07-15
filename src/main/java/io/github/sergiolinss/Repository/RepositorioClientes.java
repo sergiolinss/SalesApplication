@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RepositorioClientes extends JpaRepository<Cliente, Integer> {
@@ -15,6 +16,7 @@ public interface RepositorioClientes extends JpaRepository<Cliente, Integer> {
     // Métodos personalizados podem ser adicionados aqui, se necessário
     @Query("select c from Cliente c where c.nome like %:nome%")
     List<Cliente> findByNome(String nome);
+    //Optional<Cliente> findById(Integer id);
 
     boolean existsByNome(String nome);
     @Modifying
