@@ -9,26 +9,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/clientes") // definimos a URL
 public class ClienteController {
 
-    private RepositorioClientes repositorioClientes;
 
+    private RepositorioClientes repositorioClientes;
+    @Autowired
     public ClienteController(RepositorioClientes repositorioClientes){
         this.repositorioClientes = repositorioClientes;
     }
 
-    @GetMapping("/api/clientes/{id}")
+    @GetMapping("/{id}") // extensão a URL para acessarmos este método
     @ResponseBody
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id){
-        Optional<Cliente> cliente = RepositorioClientes.findById(id);
+    public ResponseEntity getClienteById(@PathVariable Integer id){
+        Optional<Cliente> cliente = repositorioClientes.findById(id);
+
         if (cliente.isPresent()){
-            HttpHeaders headers = new HttpHeaders();
-            headers.put("Authorization", "token");
-            ResponseEntity<Cliente> responseEntity =
-                    new ResponseEntity<>(cliente.get(), HttpStatus.OK);
+            return ResponseEntity.ok(cliente.get());
         }
+        return ResponseEntity.notFound().build();
+    }
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity saveCliente(@RequestBody Cliente clientes){
+       Cliente clienteSalvo = repositorioClientes.save(clientes);
+       return ResponseEntity.ok(clienteSalvo);
     }
 }
