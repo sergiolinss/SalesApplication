@@ -1,5 +1,7 @@
 package io.github.sergiolinss.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Cliente {
     @Column(name = "ID", nullable = false)
     private Integer id;
     private String nome;
+    @JsonIgnore // propriedade ignorada nos arquivos JSON
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY) // buscamos os pedidos a partir da tabela de clientes
     private Set<Pedido> pedidos; // lista de pedidos
 
@@ -18,7 +21,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome) {
+    public Cliente(Integer id,String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
