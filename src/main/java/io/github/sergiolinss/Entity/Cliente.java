@@ -12,6 +12,8 @@ public class Cliente {
     @Column(name = "ID", nullable = false)
     private Integer id;
     private String nome;
+    @Column(length = 11)
+    private String cpf;
     @JsonIgnore // propriedade ignorada nos arquivos JSON
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY) // buscamos os pedidos a partir da tabela de clientes
     private Set<Pedido> pedidos; // lista de pedidos
@@ -48,6 +50,14 @@ public class Cliente {
 
     public void setPedidos(Set<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override
