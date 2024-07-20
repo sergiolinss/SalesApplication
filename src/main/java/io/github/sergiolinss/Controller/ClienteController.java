@@ -28,7 +28,6 @@ public class ClienteController {
     @GetMapping("/{id}") // extensão a URL para acessarmos este método
     public Cliente getClienteById(@PathVariable Integer id) {
         Optional<Cliente> cliente = repositorioClientes.findById(id);
-
         return repositorioClientes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
@@ -57,6 +56,7 @@ public class ClienteController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
         existingCliente.setNome(clienteToUpdate.getNome());
+        existingCliente.setCpf(clienteToUpdate.getCpf());
 
         repositorioClientes.save(existingCliente);
 
@@ -64,6 +64,9 @@ public class ClienteController {
 
     @GetMapping
     public List<Cliente> findClientes(Cliente filtroDeCliente) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Example example = Example.of(filtroDeCliente, matcher);
         return repositorioClientes.findAll();
     }
 }
