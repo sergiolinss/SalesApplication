@@ -22,15 +22,7 @@ public class PersistenciaApplication {
         SpringApplication.run(PersistenciaApplication.class, args);
     }
 
-    @Autowired
-    private RepositorioClientes repositorioClientes;
 
-    @Bean
-    public CommandLineRunner teste(
-            @Autowired RepositorioClientes clientes) { // ao injetarmos @Autowired como parâmetro, não precisamos sempre chamar a o repositório ao usar uma função
-        return (args) -> {
-        Cliente c = new Cliente(null, "Fulano");
-            clientes.save(c);
 //
 //
 //
@@ -108,5 +100,3 @@ public class PersistenciaApplication {
 ////                clientesList.forEach(System.out::println);
 ////            }
         };
-    }
-}

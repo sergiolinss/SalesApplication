@@ -1,13 +1,12 @@
 package io.github.sergiolinss.Entity;
 
 import javax.persistence.*;
-import java.lang.annotation.Target;
 import java.math.BigDecimal;
 @Entity
 @Table(name = "produto") // usamos esta anotação quando a nossa tabela tem um nome diferente da nossa entidade
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false) // essa anotação só é necessária passarmos como parâmetro o nome quando a tabela tem um nome diferente
     private Integer id;
     private String descricao;
@@ -43,5 +42,14 @@ public class Produto {
 
     public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", precoUnitario=" + precoUnitario +
+                '}';
     }
 }
