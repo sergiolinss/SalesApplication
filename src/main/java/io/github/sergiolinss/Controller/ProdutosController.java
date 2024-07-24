@@ -47,14 +47,12 @@ public class ProdutosController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateProduto(@PathVariable Integer id, @RequestBody Produto produtoToUpdate){
-        Produto produtoExistente = repositorioProdutos.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "produto não encontrado"));
-
-        produtoExistente.setDescricao(produtoToUpdate.getDescricao());
-        produtoExistente.setPrecoUnitario(produtoToUpdate.getPrecoUnitario());
-
-        repositorioProdutos.save(produtoExistente);
-
+      repositorioProdutos.findById(id)
+              .map( produto -> {
+                  produtoToUpdate.setId(produto.getId());
+                  repositorioProdutos.save(produtoToUpdate);
+                  return produtoToUpdate;
+                      }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "produto não encontrado"));
     }
 
     @GetMapping
